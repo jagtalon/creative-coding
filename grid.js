@@ -1,10 +1,12 @@
 const canvasSketch = require('canvas-sketch');
 const { lerp } = require('canvas-sketch-util/math')
 const random = require('canvas-sketch-util/random')
-const palettes = require('nice-color-palettes')
+
+random.setSeed(random.getRandomSeed())
 
 const settings = {
-    dimensions: [2480, 3508]
+    dimensions: [2480, 3508],
+    suffix: random.getSeed()
   // units: 'cm',
   // pixelsPerInch: 300
 };
@@ -28,7 +30,6 @@ const sketch = () => {
 
   const points = createGrid()
   const margin = 300
-  const palette = random.pick(palettes)
 
   return ({ context, width, height }) => {
     // Set the canvas to white because otherwise we'll get a 
@@ -39,12 +40,10 @@ const sketch = () => {
     points.forEach(([u,v]) => {
       const x = lerp(margin, width - margin, u)
       const y = lerp(margin, height - margin, v)
-      const fill = random.pick(palette)
 
-      console.log(fill)
       context.fillStyle = `black`
       context.beginPath()
-      context.arc(x, y, 20, 0, 2 * Math.PI, true)
+      context.arc(x, y, (random.noise2D(u, v, 1, 1) * .5 + .5) * 20, 0, 2 * Math.PI, true)
       context.fill()
     })
   };
