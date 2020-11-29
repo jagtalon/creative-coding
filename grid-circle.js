@@ -5,15 +5,15 @@ const random = require('canvas-sketch-util/random')
 random.setSeed(random.getRandomSeed())
 
 const settings = {
-    dimensions: [2480, 3508],
-    suffix: random.getSeed()
+    dimensions: [3600, 5400],
+    suffix: "12x18"
 };
 
 const sketch = () => {
     // Create a grid of points  
     const createGrid = () => {
         const points = []
-        const count = 25
+        const count = 30
 
         for (let x = 0; x < count; x++) {
             for (let y = 0; y < count; y++) {
@@ -58,7 +58,7 @@ const sketch = () => {
             // See if a point is within a circle
             const distance = pointDistance(circle, point)
             let circleRadius = width / 2
-            let pointRadius = 20
+            let pointRadius = 25
 
             context.fillStyle = `black`
             context.beginPath()

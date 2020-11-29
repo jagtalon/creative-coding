@@ -11,7 +11,7 @@ const artworks = [
     freq: 1,
     amp: .7,
     scale: .04,
-    count: 120,
+    count: 130,
     palette: random.pick(palettes),
     rotation: 4,
     coordinates: 'grid'
@@ -24,7 +24,7 @@ const artworks = [
     scale: .04,
     count: 120,
     palette: random.pick(palettes),
-    rotation: 5,
+    rotation: 3,
     coordinates: 'random'
   }
 ]
@@ -33,13 +33,13 @@ random.setSeed(random.getRandomSeed())
 console.log(random.getSeed())
 
 const settings = {
-  dimensions: [2480, 3508],
-  suffix: random.getSeed()
+  dimensions: [3600, 5400], // 12x18
+  suffix: "12x18"
 };
 
 
 const sketch = () => {
-  const artwork = artworks[0]
+  const artwork = artworks[1]
 
   // Fetch the artwork settings.
   const {
