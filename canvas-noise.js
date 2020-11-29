@@ -39,7 +39,7 @@ const settings = {
 
 
 const sketch = () => {
-  const artwork = artworks[2]
+  const artwork = artworks[0]
 
   // Fetch the artwork settings.
   const {
@@ -71,7 +71,7 @@ const sketch = () => {
 
         points.push({
           fill: random.pick(palette),
-          radius: Math.abs(radius) * scale,
+          radius: radius * scale,
           position: [u, v],
           rotation: random.noise2D(u, v) * rotation,
           character: random.pick(characters)
