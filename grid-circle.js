@@ -60,7 +60,7 @@ const sketch = () => {
 			// See if a point is within a circle
 			const distance = pointDistance(circle, point);
 			let circleRadius = width / 2;
-			let pointRadius = 25;
+			let pointRadius = 30;
 
 			context.fillStyle = `black`;
 			context.beginPath();

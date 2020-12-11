@@ -27,6 +27,26 @@ const artworks = [
 		rotation: 3,
 		coordinates: "random",
 	},
+	{
+		characters: ["●"],
+		freq: 3,
+		amp: 0.5,
+		scale: 0.04,
+		count: 110,
+		palette: random.pick(palettes),
+		rotation: 6,
+		coordinates: "grid",
+	},
+	{
+		characters: ["●"],
+		freq: 2,
+		amp: 0.8,
+		scale: 0.04,
+		count: 100,
+		palette: random.pick(palettes),
+		rotation: 2,
+		coordinates: "grid",
+	},
 ];
 
 random.setSeed(random.getRandomSeed());
@@ -38,7 +58,7 @@ const settings = {
 };
 
 const sketch = () => {
-	const artwork = artworks[1];
+	const artwork = artworks[3];
 
 	// Fetch the artwork settings.
 	const {
