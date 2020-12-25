@@ -37,15 +37,16 @@ const artworks = [
 		rotation: 6,
 		coordinates: "grid",
 	},
+	// Denser and more fur-like.
 	{
-		characters: ["●"],
-		freq: 2,
-		amp: 0.8,
+		characters: ["●", "▃"],
+		freq: 5,
+		amp: 0.5,
 		scale: 0.04,
-		count: 100,
+		count: 150,
 		palette: random.pick(palettes),
 		rotation: 2,
-		coordinates: "grid",
+		coordinates: "random",
 	},
 ];
 
@@ -120,7 +121,7 @@ const sketch = () => {
 
 			context.save();
 			context.fillStyle = `${fill}E6`;
-			context.font = `${radius * width}px "Segoe UI"`;
+			context.font = `bold ${radius * width}px "Segoe UI"`;
 
 			context.translate(x, y);
 			context.rotate(rotation);
