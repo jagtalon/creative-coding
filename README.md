@@ -2,4 +2,5 @@
 
 Various experiments in creative coding.
 
-![](images/canvas.png)
+![](Images/repo_image.png)
+![](Images/repo_image2.png)
