@@ -18,16 +18,19 @@ const sketch = () => {
 		context.fillRect(0, 0, width, height);
 
 		const palette = random.pick(palettes);
-		const points = 1000;
-		const maxRadius = width / 3;
+		const points = 2000;
+		const maxRadius = width * 0.4;
 
 		// The golden ratio
+		// Try slightly different values to get other spirals.
 		const phi = 1.61803398875;
+		console.log(palette);
 
 		// https://www.mathsisfun.com/numbers/nature-golden-ratio-fibonacci.html
 		// https://github.com/mattdesl/canvas-sketch/blob/master/examples/canvas-dot-flower.js
+		// https://livebook.manning.com/book/generative-art/chapter-4/20
 		for (let i = 1; i < points; i++) {
-			context.fillStyle = random.pick(palette);
+			context.fillStyle = "black";
 
 			const t = i / points;
 
@@ -38,16 +41,16 @@ const sketch = () => {
 			const distance = Math.sqrt(t);
 
 			// Scale this point to our max dimensions
+			// r represents the radius of the unit circle.
+			// Try incrementing r differently.
 			const r = distance * maxRadius;
 
 			const cx = width / 2 + Math.cos(theta) * r;
 			const cy = height / 2 + Math.sin(theta) * r;
 
 			// Make the circles smaller when closer to center.
-			const radius = 20 * distance;
-
-			// context.font = `bold ${radius}px "Segoe UI"`;
-			// context.fillText(theta, cx, cy);
+			// Also, don't go below 0.25 distance to prevent points that are too small.
+			const radius = 20 * (distance > 0.25 ? distance : 0.25);
 
 			context.beginPath();
 			context.arc(cx, cy, radius, 0, 2 * Math.PI, true);
