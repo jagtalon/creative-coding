@@ -9,36 +9,24 @@ const settings = {
 };
 
 const sketch = () => {
-	const margin = 300;
+	// https://www.mathsisfun.com/numbers/nature-golden-ratio-fibonacci.html
+	// https://github.com/mattdesl/canvas-sketch/blob/master/examples/canvas-dot-flower.js
+	// https://livebook.manning.com/book/generative-art/chapter-4/20
+	const generateSpiral = (phi, points, maxRadius, artboard) => {
+		const { context, width, height, color } = artboard;
 
-	return ({ context, width, height }) => {
-		// Set the canvas to white because otherwise we'll get a
-		// transparent background.
-		context.fillStyle = "white";
-		context.fillRect(0, 0, width, height);
-
-		const palette = random.pick(palettes);
-		const points = 2000;
-		const maxRadius = width * 0.4;
-
-		// The golden ratio
-		// Try slightly different values to get other spirals.
-		const phi = 1.61803398875;
-		console.log(palette);
-
-		// https://www.mathsisfun.com/numbers/nature-golden-ratio-fibonacci.html
-		// https://github.com/mattdesl/canvas-sketch/blob/master/examples/canvas-dot-flower.js
-		// https://livebook.manning.com/book/generative-art/chapter-4/20
 		for (let i = 1; i < points; i++) {
-			context.fillStyle = "black";
-
-			const t = i / points;
+			if (Array.isArray(color)) {
+				context.fillStyle = random.pick(color) + "55";
+			} else {
+				context.fillStyle = color;
+			}
 
 			// Pick our angle based on the golden ratio
 			const theta = 2 * Math.PI * i * phi;
 
 			// Get back a distance 0..1 based on current step
-			const distance = Math.sqrt(t);
+			const distance = Math.sqrt(i / points);
 
 			// Scale this point to our max dimensions
 			// r represents the radius of the unit circle.
@@ -50,12 +38,37 @@ const sketch = () => {
 
 			// Make the circles smaller when closer to center.
 			// Also, don't go below 0.25 distance to prevent points that are too small.
-			const radius = 20 * (distance > 0.25 ? distance : 0.25);
+			const radius = 35 * (distance > 0.25 ? distance : 0.25);
 
 			context.beginPath();
 			context.arc(cx, cy, radius, 0, 2 * Math.PI, true);
 			context.fill();
 		}
+	};
+
+	return ({ context, width, height }) => {
+		// Set the canvas to white because otherwise we'll get a
+		// transparent background.
+		context.fillStyle = "black";
+		context.fillRect(0, 0, width, height);
+
+		generateSpiral(1.61803398875, 400, width * 0.4, {
+			context,
+			width,
+			height,
+			color: "#BE1250",
+		});
+
+		context.translate(width / 2, height / 2);
+		context.rotate(0.015);
+		context.translate(-width / 2, -height / 2);
+
+		generateSpiral(1.61803398875, 400, width * 0.4, {
+			context,
+			width,
+			height,
+			color: "#422136",
+		});
 	};
 };
 
