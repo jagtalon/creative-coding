@@ -12,8 +12,9 @@ const sketch = () => {
 	// https://www.mathsisfun.com/numbers/nature-golden-ratio-fibonacci.html
 	// https://github.com/mattdesl/canvas-sketch/blob/master/examples/canvas-dot-flower.js
 	// https://livebook.manning.com/book/generative-art/chapter-4/20
-	const generateSpiral = (phi, points, maxRadius, artboard) => {
-		const { context, width, height, color } = artboard;
+	const generateSpiral = (phi, points, maxRadius, artboard, dots) => {
+		const { context, width, height } = artboard;
+		const { color, initRadius } = dots;
 
 		for (let i = 1; i < points; i++) {
 			if (Array.isArray(color)) {
@@ -38,7 +39,7 @@ const sketch = () => {
 
 			// Make the circles smaller when closer to center.
 			// Also, don't go below 0.25 distance to prevent points that are too small.
-			const radius = 35 * (distance > 0.25 ? distance : 0.25);
+			const radius = initRadius * (distance > 0.25 ? distance : 0.25);
 
 			context.beginPath();
 			context.arc(cx, cy, radius, 0, 2 * Math.PI, true);
@@ -49,25 +50,44 @@ const sketch = () => {
 	return ({ context, width, height }) => {
 		// Set the canvas to white because otherwise we'll get a
 		// transparent background.
-		context.fillStyle = "black";
+		context.fillStyle = "white";
 		context.fillRect(0, 0, width, height);
 
-		generateSpiral(1.61803398875, 400, width * 0.4, {
-			context,
-			width,
-			height,
-			color: "#BE1250",
-		});
+		const colors = [
+			"#7400b8",
+			"#6930c3",
+			"#5e60ce",
+			"#5390d9",
+			"#4ea8de",
+			"#48bfe3",
+			"#56cfe1",
+			"#64dfdf",
+			"#72efdd",
+			"#80ffdb",
+		];
 
-		context.translate(width / 2, height / 2);
-		context.rotate(0.015);
-		context.translate(-width / 2, -height / 2);
+		let initRadius = 15;
+		colors.reverse().forEach((color) => {
+			generateSpiral(
+				1.61803398875,
+				300,
+				width * 0.4,
+				{
+					context,
+					width,
+					height,
+				},
+				{
+					color,
+					initRadius,
+				}
+			);
 
-		generateSpiral(1.61803398875, 400, width * 0.4, {
-			context,
-			width,
-			height,
-			color: "#422136",
+			initRadius += 2;
+
+			context.translate(width / 2, height / 2);
+			context.rotate(0.028);
+			context.translate(-width / 2, -height / 2);
 		});
 	};
 };
