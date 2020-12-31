@@ -7,7 +7,8 @@ const settings = {
 };
 
 const sketch = () => {
-	/* Create a spiral.
+	/*
+		Create a spiral.
 
 		https://www.mathsisfun.com/numbers/nature-golden-ratio-fibonacci.html
 		https://github.com/mattdesl/canvas-sketch/blob/master/examples/canvas-dot-flower.js
