@@ -10,7 +10,7 @@ const sketch = () => {
 	/* Create a spiral.
 
 		https://www.mathsisfun.com/numbers/nature-golden-ratio-fibonacci.html
-	  https://github.com/mattdesl/canvas-sketch/blob/master/examples/canvas-dot-flower.js
+		https://github.com/mattdesl/canvas-sketch/blob/master/examples/canvas-dot-flower.js
 		https://livebook.manning.com/book/generative-art/chapter-4/20
 	*/
 	const generateSpiral = (phi, points, maxRadius, artboard, dots) => {
